@@ -20,8 +20,22 @@ namespace MovieRental.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Rental.Rental rental)
         {
-	        return Ok(_features.Save(rental));
+	        return Ok(_features.SaveAsync(rental));
         }
 
-	}
+        [HttpGet("customer")]
+        public async Task<IActionResult> GetByCustomerName([FromQuery] string customerName)
+        {
+            if (string.IsNullOrWhiteSpace(customerName))
+                return BadRequest("Customer name is required.");
+
+            var rentals = await _features.GetRentalsByCustomerNameAsync(customerName);
+
+            if (!rentals.Any())
+                return NotFound($"No rentals found for customer '{customerName}'.");
+
+            return Ok(rentals);
+        }
+
+    }
 }

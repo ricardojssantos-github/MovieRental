@@ -19,11 +19,13 @@ namespace MovieRental.Rental
 			return rental;
 		}
 
-		//TODO: finish this method and create an endpoint for it
-		public IEnumerable<Rental> GetRentalsByCustomerName(string customerName)
-		{
-			return [];
-		}
-
-	}
+        //TODO: finish this method and create an endpoint for it
+        public async Task<IEnumerable<Rental>> GetRentalsByCustomerNameAsync(string customerName)
+        {
+            return await _movieRentalDb.Rentals
+				.Include(r => r.Customer)
+				.Where(r => r.Customer.Name.Contains(customerName))
+				.ToListAsync();
+        }
+    }
 }
