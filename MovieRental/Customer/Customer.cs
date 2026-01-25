@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MovieRental.Customer
 {
@@ -11,7 +10,6 @@ namespace MovieRental.Customer
         [Required]
         public string Name { get; set; }
 
-        // Relacionamento 1:N com Rentals
         public ICollection<Rental.Rental> Rentals { get; set; } = new List<Rental.Rental>();
     }
 }

@@ -1,10 +1,12 @@
 ﻿namespace MovieRental.PaymentProviders
 {
-    public class MbWayProvider
+    public class MbWayProvider : IPaymentProvider
     {
+        public string PaymentMethod => "MBWAY";
+
         public Task<bool> Pay(double price)
         {
-            //ignore this implementation
+            //ignore this implementation    
             return Task.FromResult<bool>(true);
         }
     }
